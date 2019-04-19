@@ -497,19 +497,19 @@ static void ADS1256_SaveData (int32_t col0, int32_t col1, int32_t col2){
 //---------------------------------------------------------------------------------------------------------	
 	if (col1 < 0){
 		col1 = -col1 ;
-		fprintf(datos1,"-%ld.%03ld%03ld\r\t", col1 /1000000, (col1%1000000)/1000, col1%1000) ;
+		fprintf(datos0,"-%ld.%03ld%03ld\r\t", col1 /1000000, (col1%1000000)/1000, col1%1000) ;
 	}		
 	else{
-		fprintf(datos1," %ld.%03ld%03ld\r\t", col1 /1000000, (col1%1000000)/1000, col1%1000) ;	
+		fprintf(datos0," %ld.%03ld%03ld\r\t", col1 /1000000, (col1%1000000)/1000, col1%1000) ;	
 	}
 //---------------------------------------------------------------------------------------------------------	
 	if (col2 < 0){
 		col2 = -col2 ;
-		fprintf(datos2,"-%ld.%03ld%03ld\r\n", col2 /1000000, (col2%1000000)/1000, col2%1000) ;
+		fprintf(datos0,"-%ld.%03ld%03ld\r\n", col2 /1000000, (col2%1000000)/1000, col2%1000) ;
 		fflush(stdout) ;
 	}		
 	else{
-		fprintf(datos2," %ld.%03ld%03ld\r\n", col2 /1000000, (col2%1000000)/1000, col2%1000) ;	
+		fprintf(datos0," %ld.%03ld%03ld\r\n", col2 /1000000, (col2%1000000)/1000, col2%1000) ;	
 		fflush(stdout) ;
 	}
 	fclose(datos0) ;
@@ -618,7 +618,7 @@ int  main(){
 	            ch2[size] = buf[0] * 100/167 ;
 	            size++ ;
 				
-				if(size == datac ount) {
+				if(size == datacount) {
 	            	printf ("buffer is full\n") ;
 	            	bcm2835_spi_end() ;
 					bsp_DelayUS(100000) ;
