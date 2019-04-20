@@ -30,6 +30,7 @@
 #define uint32_t unsigned long
 
 uint8_t int_on = 0 ;
+uint32_t Data_ready_count ;
 typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 //---------------------------------------------------------------------------------------------------------
@@ -319,6 +320,7 @@ void ADS1256_StartScan(uint8_t _ucScanMode){
 uint8_t ADS1256_Scan(void){
 	if (DRDY_IS_LOW())
 	{
+	    Data_ready_count++ ;
 		ADS1256_ISR();
 		return 1;
 	}
@@ -489,7 +491,7 @@ int  main(){
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
-	uint32_t Data_ready_count ;
+
 	printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
 	printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
 	printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
@@ -577,9 +579,9 @@ int  main(){
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
 	    	while((ADS1256_Scan() == 0)) ;
-	    		if (DRDY_IS_LOW()){
+	    		/*if (DRDY_IS_LOW()){
 	    			Data_ready_count++ ;
-	    		}
+	    		}*/
 								
 				if (int_on = 1){	
 					for (i=0; i < 8; i++){
@@ -597,7 +599,7 @@ int  main(){
 				
 				if(size == datacount) {
 					printf("Data ready is low: %ld \n", Data_ready_count) ;
-	            	printf ("buffer is full\n") ;
+	            	printf ("buffer is full \n") ;
 	            	bcm2835_spi_end() ;
 					bsp_DelayUS(100000) ;
 	            	break ;
