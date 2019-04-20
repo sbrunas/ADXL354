@@ -475,13 +475,13 @@ static void ADS1256_SaveData (int32_t col0, int32_t col1, int32_t col2){
 	}
 	fclose(datos0) ;
 }
+uint8_t int_on = 0 ;
 //MAIN Program---------------------------------------------------------------------------------------------
 int  main(){
     uint8_t id;
     int32_t adc[8];
     uint8_t ch_num = 8 ;
 	uint32_t i;
-	static volatile uint8_t int_on = 0 ;
 //BUFFER---------------------------------------------------------------------------------------------------
 	int32_t buf[8] ;
 	uint32_t size = 0 ;
