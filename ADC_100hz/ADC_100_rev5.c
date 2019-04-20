@@ -137,6 +137,10 @@ static void ADS1256_DelayDATA(void);//ok
 void  bsp_DelayUS(uint64_t micros);//ok
 void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate);//ok
 static void ADS1256_WriteCmd(uint8_t _cmd);
+void ADS1256_ISR(void);
+static void ADS1256_SetChannal(uint8_t _ch);
+static int32_t ADS1256_ReadData(void);
+static void ADS1256_WriteReg(uint8_t _RegID, uint8_t _RegValue);//ok
 
 
 
@@ -527,7 +531,7 @@ int  main(){
 	            ch1[size] = buf[1] * 100/167 ;
 	            ch2[size] = buf[2] * 100/167 ;
 	            size++ ;
-	            printf("Data ready : %d ", DRDY_IS_LOW);
+	            printf("Data ready : %d ", DRDY_IS_LOW());
 	            for (i=0; i < 8; i++){
 					buf[i] = 0 ;
 				}
