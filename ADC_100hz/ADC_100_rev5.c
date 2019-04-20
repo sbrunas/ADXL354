@@ -223,6 +223,21 @@ static uint8_t ADS1256_Recive8Bit(void){
 	return read;
 }
 //---------------------------------------------------------------------------------------------------------
+//	name: ADS1256_WriteReg
+//	function: Write the corresponding register
+//	parameter: _RegID: register  ID
+//			 _RegValue: register Value
+//	The return value: NULL
+//---------------------------------------------------------------------------------------------------------
+static void ADS1256_WriteReg(uint8_t _RegID, uint8_t _RegValue){
+	CS_0();	/* SPI  cs  = 0 */
+	ADS1256_Send8Bit(CMD_WREG | _RegID);	/*Write command register */
+	ADS1256_Send8Bit(0x00);		/*Write the register number */
+
+	ADS1256_Send8Bit(_RegValue);	/*send register value */
+	CS_1();	/* SPI   cs = 1 */
+}
+//---------------------------------------------------------------------------------------------------------
 //	name: ADS1256_DelayDATA
 //	function: delay
 //	parameter: NULL
@@ -385,6 +400,41 @@ int32_t ADS1256_GetAdc(uint8_t _ch){
 	iTemp = g_tADS1256.AdcNow[_ch];
 
 	return iTemp;
+}
+//---------------------------------------------------------------------------------------------------------
+//	name: ADS1256_ReadData
+//	function: read ADC value
+//	parameter: NULL
+//	The return value:  NULL
+//---------------------------------------------------------------------------------------------------------
+static int32_t ADS1256_ReadData(void){
+	uint32_t read = 0;
+    static uint8_t buf[3];
+
+	CS_0();	/* SPI   cs = 0 */
+
+	ADS1256_Send8Bit(CMD_RDATA);	/* read ADC command  */
+
+	ADS1256_DelayDATA();	/*delay time  */
+
+	/*Read the sample results 24bit*/
+    buf[0] = ADS1256_Recive8Bit();
+    buf[1] = ADS1256_Recive8Bit();
+    buf[2] = ADS1256_Recive8Bit();
+
+    read = ((uint32_t)buf[0] << 16) & 0x00FF0000;
+    read |= ((uint32_t)buf[1] << 8);  /* Pay attention to It is wrong   read |= (buf[1] << 8) */
+    read |= buf[2];
+
+	CS_1();	/* SPIƬѡ = 1 */
+
+	/* Extend a signed number*/
+    if (read & 0x800000)
+    {
+	    read |= 0xFF000000;
+    }
+
+	return (int32_t)read;
 }
 //---------------------------------------------------------------------------------------------------------
 //	name: ADS1256_SaveData
