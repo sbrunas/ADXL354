@@ -29,7 +29,7 @@
 #define uint16_t unsigned short
 #define uint32_t unsigned long
 
-
+uint8_t int_on = 0 ;
 typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 //---------------------------------------------------------------------------------------------------------
@@ -475,7 +475,7 @@ static void ADS1256_SaveData (int32_t col0, int32_t col1, int32_t col2){
 	}
 	fclose(datos0) ;
 }
-uint8_t int_on = 0 ;
+
 //MAIN Program---------------------------------------------------------------------------------------------
 int  main(){
     uint8_t id;
