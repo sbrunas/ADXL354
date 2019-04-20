@@ -486,6 +486,7 @@ int  main(){
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
+	bool Data_ready = FALSE ;
 	printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
 	printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
 	printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
@@ -573,7 +574,9 @@ int  main(){
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
 	    	while((ADS1256_Scan() == 0)) ;
-				if ((DRDY_IS_LOW())=!0){	
+	    		printf("Data ready: %d \n ", DRDY_IS_LOW());
+	    		//Data_ready=(DRDY_IS_LOW()) ;
+				if ((DRDY_IS_LOW()) != 0){	
 					for (i=0; i < 8; i++){
 						buf[i] = ADS1256_GetAdc(i) ;
 					}
