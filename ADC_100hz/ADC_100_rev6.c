@@ -486,8 +486,8 @@ int  main(){
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
-	printf("Samples rate for the ADC: \n \t \t 30K sps \t 15K sps \t 7K5 sps \t 3.75K sps") ;
-	printf(" \n \t \t 2K sps \t 1K sps \t 500 sps \t 100 sps") ;
+	printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
+	printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
 	printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
 	printf(" \n \t \t 15 sps \t 10 sps \t 5 sps \t 2.5 sps \n") ;
 	printf("choose the sample rate for the acquisition: ") ;
@@ -581,7 +581,6 @@ int  main(){
 	            ch1[size] = buf[1] * 100/167 ;
 	            ch2[size] = buf[2] * 100/167 ;
 	            size++ ;
-	            printf("Data ready : %d ", DRDY_IS_LOW());
 	            for (i=0; i < 8; i++){
 					buf[i] = 0 ;
 				}
