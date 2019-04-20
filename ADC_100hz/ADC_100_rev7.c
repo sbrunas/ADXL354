@@ -585,7 +585,7 @@ int  main(){
 								
 				if (int_on = 1){	
 					for (i=0; i < 8; i++){
-						buf[i] = ADS1256_GetAdc(i) ;
+						buf[i] = g_tADS1256.AdcNow[i] ;
 					}
 					ch0[size] = buf[0] * 100/167 ;
 	            	ch1[size] = buf[1] * 100/167 ;
