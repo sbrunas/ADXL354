@@ -29,6 +29,7 @@
 #define uint16_t unsigned short
 #define uint32_t unsigned long
 
+
 typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 //---------------------------------------------------------------------------------------------------------
@@ -357,6 +358,7 @@ void ADS1256_ISR(void){
 		{
 			g_tADS1256.Channel = 0;
 		}
+		int_on = 1 ;
 	}
 }
 //---------------------------------------------------------------------------------------------------------
@@ -479,6 +481,7 @@ int  main(){
     int32_t adc[8];
     uint8_t ch_num = 8 ;
 	uint32_t i;
+	static volatile uint8_t int_on = 0 ;
 //BUFFER---------------------------------------------------------------------------------------------------
 	int32_t buf[8] ;
 	uint32_t size = 0 ;
@@ -574,9 +577,9 @@ int  main(){
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
 	    	while((ADS1256_Scan() == 0)) ;
-	    		printf("Data ready: %d \n ", DRDY_IS_LOW());
+	    		//printf("Data ready: %d \n ", DRDY_IS_LOW());
 	    		//Data_ready=(DRDY_IS_LOW()) ;
-				if ((DRDY_IS_LOW()) != 0){	
+				if (int_on = 1){	
 					for (i=0; i < 8; i++){
 						buf[i] = ADS1256_GetAdc(i) ;
 					}
@@ -587,6 +590,7 @@ int  main(){
 	            	for (i=0; i < 8; i++){
 						buf[i] = 0 ;
 					}
+					int_on = 0;
 				}
 				
 				if(size == datacount) {
