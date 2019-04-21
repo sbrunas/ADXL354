@@ -600,9 +600,10 @@ int  main(){
 	    		}*/
 								
 				if (int_on = 1){
-					
+					printf("Target_sample: %d \n", Target_sample.adc_count) ;
+					printf("----- \n ") ;
 					if (Target_sample.adc_count == 0){
-						printf("Target_sample: %d \n", Target_sample.adc_count) ;
+
 						printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
 						Target_sample.adc_count++ ;
 						printf("----- \n ") ;
