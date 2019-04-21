@@ -442,7 +442,8 @@ static void ADS1256_SaveData (int32_t col0, int32_t col1, int32_t col2){
 	}
 	fclose(datos0) ;
 }
-
+//pointer for each analog input
+	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
 //MAIN Program---------------------------------------------------------------------------------------------
 int  main(){
     uint8_t id;
@@ -468,8 +469,7 @@ int  main(){
 	datacount = datatime * (sample_rate/ch_num) ; 
 	sample_rate_per_channel = sample_rate / ch_num ;
 	fflush(stdin) ;
-	//pointer for each analog input
-	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
+	
 //ch0 memory block-----------------------------------------------------------------------------------------
   	ch0 = malloc(sizeof(int32_t) * datacount); /* allocate memory for datacount int's */
  	if (!ch0) { /* If data == 0 after the call to malloc, allocation failed for some reason */
