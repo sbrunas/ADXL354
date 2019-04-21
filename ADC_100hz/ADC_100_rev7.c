@@ -600,13 +600,14 @@ int  main(){
 	    		}*/
 								
 				if (int_on = 1){
-
+					printf("Target_sample: %d \n", Target_sample.adc_count) ;
 					printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
 					Target_sample.adc_count++ ;
 					
 					printf("----- \n ") ;
 					if (Target_sample.adc_count == 0){
 						ch0[size] = g_tADS1256.AdcNow[0] ;
+						size++ ;
 					}
 	            	if (Target_sample.adc_count==1){
 	            	ch1[size] = g_tADS1256.AdcNow[1] ;
@@ -614,7 +615,7 @@ int  main(){
 	            	if (Target_sample.adc_count == 2){
 	            	ch2[size] = g_tADS1256.AdcNow[2] ;
 	            	}
-	            	size++ ;
+	            	
 	            	for (i=0; i < 8; i++){
 						g_tADS1256.AdcNow[i] = 0 ;
 					}
