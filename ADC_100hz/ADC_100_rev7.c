@@ -506,17 +506,26 @@ int  main(){
 	//pointer for each analog input
 	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
 //ch0 memory block-----------------------------------------------------------------------------------------
-  	ch0 = malloc(sizeof(int32_t) * datacount); /* allocate memory for datacount int's */
- 	if (!ch0) { /* If data == 0 after the call to malloc, allocation failed for some reason */
-    	perror("Error allocating memory for channel 0");
+  	ch0 = calloc(datacount, sizeof(int32_t)) ; 
+  	if(!ch0){
+  		perror("Error allocating memory for channel 0");
     	abort();
-	}
+  	}
+
+  	if (!bcm2835_init())
+    	return 1;
+
+  	//ch0 = malloc(sizeof(int32_t) * datacount); /* allocate memory for datacount int's */
+ 	//if (!ch0) { /* If data == 0 after the call to malloc, allocation failed for some reason */
+    //	perror("Error allocating memory for channel 0");
+    //	abort();
+	//}
   	/* ch points to a valid block of memory.
      clearing block. */
-  	memset(ch0, 0.0, sizeof(int32_t)*datacount);
+  	//memset(ch0, 0.0, sizeof(int32_t)*datacount);
 
-    if (!bcm2835_init())
-    	return 1;
+    //if (!bcm2835_init())
+    //	return 1;
 //ch1 memory block-----------------------------------------------------------------------------------------
   	ch1 = malloc(sizeof(int32_t) * datacount); /* allocate memory for datacount int's */
  	if (!ch1) { /* If data == 0 after the call to malloc, allocation failed for some reason */
@@ -615,6 +624,9 @@ int  main(){
 			ADS1256_SaveData(ch0[i]*100/167, ch1[i]*100/167, ch2[i]*100/167) ;
 		}
 		fclose(datos0) ;
+		free(ch0) ;
+		free(ch1) ;
+		free(ch2) ;
     	bcm2835_close() ;
     	printf("done\n");
     return 0 ;
