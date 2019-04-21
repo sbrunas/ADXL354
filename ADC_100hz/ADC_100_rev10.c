@@ -494,6 +494,7 @@ int  main(){
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
 	uint8_t select_sps ;
+	uint8_t case_sps = 0 ;
 	struct{
 		unsigned int adc_count : 3 ;	
 	}Target_sample ;
@@ -504,23 +505,23 @@ int  main(){
 		system("clear");
 		printf("\t Samples rate for the ADC\n") ;
 		printf("\t*** Choose the sample rate for the acquisition: *** \n") ;
-		printf("\t 30K sps (0)\n");
-		printf("\t 15K sps (1)\n");
-    	printf("\t 15K sps (2)\n");
+		printf("\t 30K sps   (0)\n");
+		printf("\t 15K sps   (1)\n");
+    	printf("\t 15K sps   (2)\n");
     	printf("\t 3.75K sps (3)\n");
-    	printf("\t 2K sps (4)\n");
-    	printf("\t 1K sps (5)\n");
-    	printf("\t 500 sps (6)\n");
-    	printf("\t 100 sps (7)\n");
-    	printf("\t 60 sps (8)\n");
-    	printf("\t 50 sps (9)\n");
-    	printf("\t 30 sps (10)\n");
-    	printf("\t 25 sps (11)\n");
-    	printf("\t 15 sps (12)\n");
-    	printf("\t 10 sps (13)\n");
-    	printf("\t 5 sps (14)\n");
-    	printf("\t 2.5 sps (15)\n");
-    	printf("\t EXIT (16)\n");
+    	printf("\t 2K sps    (4)\n");
+    	printf("\t 1K sps    (5)\n");
+    	printf("\t 500 sps   (6)\n");
+    	printf("\t 100 sps   (7)\n");
+    	printf("\t 60 sps    (8)\n");
+    	printf("\t 50 sps    (9)\n");
+    	printf("\t 30 sps    (10)\n");
+    	printf("\t 25 sps    (11)\n");
+    	printf("\t 15 sps    (12)\n");
+    	printf("\t 10 sps    (13)\n");
+    	printf("\t 5 sps     (14)\n");
+    	printf("\t 2.5 sps   (15)\n");
+    	printf("\t EXIT      (16)\n");
     	printf("\t------------------------------\n");
 		printf("\t *** Enter Your Choice *** \n");
 		printf("\t------------------------------\n\n");
@@ -532,91 +533,91 @@ int  main(){
 			case 0:
 				printf("\n\tYou Selected 30.000 sps!");
 				sample_rate = 30000 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 1:
 				printf("\n\tYou Selected 15.000 sps!");
 				sample_rate = 15000 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 2:
 				printf("\n\tYou Selected 7500 sps!");			
 				sample_rate = 7500 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 3:
 				printf("\n\tYou Selected 3.750 sps!");
 				sample_rate = 3750 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 4:
 				printf("\n\tYou Selected 2.000 sps!");
 				sample_rate = 2000 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 5:
 				printf("\n\tYou Selected 1000 sps!");
 				sample_rate = 1000 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 6:
 				printf("\n\tYou Selected 500 sps!");
 				sample_rate = 500 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 7:
 				printf("\n\tYou Selected 100 sps!");
 				sample_rate = 100 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 8:
 				printf("\n\tYou Selected 60 sps!");
 				sample_rate = 60 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 9:
 				printf("\n\tYou Selected 50 sps!");
 				sample_rate = 50 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 10:
 				printf("\n\tYou Selected 30 sps!");
 				sample_rate = 30 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 11:
 				printf("\n\tYou Selected 25 sps!");
 				sample_rate = 25 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 12:
 				printf("\n\tYou Selected 15 sps!");
 				sample_rate = 15 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 13:
 				printf("\n\tYou Selected 10 sps!");
 				sample_rate = 10 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 14:
 				printf("\n\tYou Selected 5 sps!");
 				sample_rate = 5 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;
 			case 15:
 				printf("\n\tYou Selected 2.5 sps!");
 				sample_rate = 2.5 ;
-				select_sps = 1 ;
+				case_sps = 1 ;
 				break ;	
 			case 16:
 				printf("\n\tclosing the program....");
 				abort();
 			default:
 				printf("\n\t\n\nINVALID SELECTION...Please try again\n");													
-				select_sps = 0 ;
+				case_sps = 0 ;
 		}
-	}while(select_sps!=1) ;
+	}while(case_sps!=1) ;
 //TIME MENU---------------------------------------------------------------------------------------------------	
 	printf("\n\tEnter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
@@ -699,7 +700,61 @@ int  main(){
 	}
 //ADS1256 config-------------------------------------------------------------------------------------------
   	
-  	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);
+  	switch(select_sps){
+  		case 0:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_30000SPS);
+			break ;
+		case 1:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15000SPS);
+			break ;
+		case 2:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_7500SPS);
+			break ;
+		case 3:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_3750SPS);
+			break ;
+		case 4:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_2000SPS);
+			break ;
+		case 5:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);
+			break ;
+		case 6:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_500SPS);
+			break ;
+		case 7:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_100SPS);
+			break ;
+		case 8:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_60SPS);
+			break ;
+		case 9:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_50SPS);
+			break ;
+		case 10:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_30SPS);
+			break ;
+		case 11:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_25SPS);
+			break ;
+		case 12:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
+			break ;
+		case 13:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_10SPS);
+			break ;
+		case 14:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_5SPS);
+			break ;
+		case 15:
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_2d5PS);
+			break ;
+		case 16:
+			printf("\n\tCan't configure the sample rate");
+			abort();
+		default:
+			printf("\n\t\n\nConfiguring the default sample rate = 1000 sps");													
+  	}
     printf("\n\tADS1256 Ready");
     //Single_ended or Differential
     //start with channel = 0
