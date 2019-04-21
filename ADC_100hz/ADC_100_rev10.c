@@ -747,7 +747,7 @@ int  main(){
 			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_5SPS);
 			break ;
 		case 15:
-			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_2d5PS);
+			ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_2d5SPS);
 			break ;
 		case 16:
 			printf("\n\tCan't configure the sample rate");
