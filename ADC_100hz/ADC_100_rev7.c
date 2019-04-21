@@ -601,11 +601,11 @@ int  main(){
 								
 				if (int_on = 1){
 					printf("Target_sample: %d \n", Target_sample.adc_count) ;
+					Target_sample.adc_count++ ;
 					printf("----- \n ") ;
 					if (Target_sample.adc_count == 0){
-
 						printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
-						Target_sample.adc_count++ ;
+
 						printf("----- \n ") ;
 						ch0[size] = g_tADS1256.AdcNow[0] ;
 						size++ ;
