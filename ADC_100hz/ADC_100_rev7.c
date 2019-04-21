@@ -585,9 +585,10 @@ int  main(){
 	    		}*/
 								
 				if (int_on = 1){	
-					/*for (i=0; i < 8; i++){
-						buf[i] = g_tADS1256.AdcNow[i] ;
-					}*/
+					for (i=0; i < 8; i++){
+						printf("AdcNow: %ld \n", g_tADS1256.AdcNow[i]) ;
+					}
+					printf("-----") ;
 					ch0[size] = g_tADS1256.AdcNow[0] * 100/167 ;
 	            	ch1[size] = g_tADS1256.AdcNow[1] * 100/167 ;
 	            	ch2[size] = g_tADS1256.AdcNow[2] * 100/167 ;
@@ -595,7 +596,7 @@ int  main(){
 	            	for (i=0; i < 8; i++){
 						g_tADS1256.AdcNow[i] = 0 ;
 					}
-					int_on = 0;
+					int_on = 0 ;
 				}
 				
 				if(size == datacount) {
