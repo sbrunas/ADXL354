@@ -5,6 +5,8 @@
 #include <math.h>
 #include <errno.h>
 #include <stdlib.h>
+#include<conio.h>
+
 
 //#define  DRDY  RPI_V2_GPIO_P1_11         //P0
 #define  DRDY  17
@@ -491,29 +493,129 @@ int  main(){
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
-	
+	uint8_t select_sps ;
 	struct{
 		unsigned int adc_count : 3 ;	
 	}Target_sample ;
 	
 	Target_sample.adc_count = 7 ;
 
-	printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
-	printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
-	printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
-	printf(" \n \t \t 15 sps \t 10 sps \t 5 sps \t 2.5 sps \n") ;
-	printf("choose the sample rate for the acquisition: ") ;
 	do{
-		scanf("%ld", &sample_rate) ;
-		  fflush(stdout);
-		if (sample_rate!=1000 || sample_rate!=2000){
-			printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
-			printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
-			printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
-			printf(" \n \t \t 15 sps \t 10 sps \t 5 sps \t 2.5 sps \n") ;
-			printf("choose the sample rate for the acquisition: ") ;
+		clrscr();
+		printf("\t Samples rate for the ADC\n") ;
+		printf("\t***Choose the sample rate for the acquisition:*** \n") ;
+		printf("\t 30K sps (0)\n");
+		printf("\t 15K sps (1)\n");
+    	printf("\t 3.75K sps (2)\n");
+    	printf("\t 2K sps (3)\n");
+    	printf("\t 1K sps (4)\n");
+    	printf("\t 500 sps (5)\n");
+    	printf("\t 100 sps (6)\n");
+    	printf("\t 60 sps (7)\n");
+    	printf("\t 50 sps (8)\n");
+    	printf("\t 30 sps (9)\n");
+    	printf("\t 25 sps (10)\n");
+    	printf("\t 15 sps (11)\n");
+    	printf("\t 10 sps (12)\n");
+    	printf("\t 5 sps (13)\n");
+    	printf("\t 2.5 sps (14)\n");
+    	printf("\t EXIT (15)\n");
+    	printf("\t------------------------------\n");
+		printf("\t ***Enter Your Choice*** \n");
+		printf("\t------------------------------\n\n");
+		printf("\tOption for the sample rate: ")
+		scanf("%ld", &select_sps) ;
+		fflush(stdout);
+
+		switch (select_sps){
+			case 0:
+				printf("\n\tYou Selected 30.000 sps!");
+				sample_rate = 30000 ;
+				select_sps = 1 ;
+				break ;
+			case 1:
+				printf("\n\tYou Selected 15.000 sps!");
+				sample_rate = 15000 ;
+				select_sps = 1 ;
+				break ;
+			case 2:
+				printf("\n\tYou Selected 7500 sps!");			
+				sample_rate = 7500 ;
+				select_sps = 1 ;
+				break ;
+			case 3:
+				printf("\n\tYou Selected 3.750 sps!");
+				sample_rate = 3750 ;
+				select_sps = 1 ;
+				break ;
+			case 4:
+				printf("\n\tYou Selected 2.000 sps!");
+				sample_rate = 2000 ;
+				select_sps = 1 ;
+				break ;
+			case 5:
+				printf("\n\tYou Selected 1000 sps!");
+				sample_rate = 1000 ;
+				select_sps = 1 ;
+				break ;
+			case 6:
+				printf("\n\tYou Selected 500 sps!");
+				sample_rate = 500 ;
+				select_sps = 1 ;
+				break ;
+			case 7:
+				printf("\n\tYou Selected 100 sps!");
+				sample_rate = 100 ;
+				select_sps = 1 ;
+				break ;
+			case 8:
+				printf("\n\tYou Selected 60 sps!");
+				sample_rate = 60 ;
+				select_sps = 1 ;
+				break ;
+			case 9:
+				printf("\n\tYou Selected 50 sps!");
+				sample_rate = 50 ;
+				select_sps = 1 ;
+				break ;
+			case 10:
+				printf("\n\tYou Selected 30 sps!");
+				sample_rate = 30 ;
+				select_sps = 1 ;
+				break ;
+			case 11:
+				printf("\n\tYou Selected 25 sps!");
+				sample_rate = 25 ;
+				select_sps = 1 ;
+				break ;
+			case 12:
+				printf("\n\tYou Selected 15 sps!");
+				sample_rate = 15 ;
+				select_sps = 1 ;
+				break ;
+			case 13:
+				printf("\n\tYou Selected 10 sps!");
+				sample_rate = 10 ;
+				select_sps = 1 ;
+				break ;
+			case 14:
+				printf("\n\tYou Selected 5 sps!");
+				sample_rate = 5 ;
+				select_sps = 1 ;
+				break ;
+			case 15:
+				printf("\n\tYou Selected 2.5 sps!");
+				sample_rate = 2.5 ;
+				select_sps = 1 ;
+				break ;	
+			case 16:
+				printf("\n\tclosing the program....");
+				exit();
+			default:
+				printf("\n\t\n\nINVALID SELECTION...Please try again\n");													
+				select_sps = 0 ;
 		}
-	}while(sample_rate!=1000 || sample_rate!=2000) ;
+	}while(select_sps!=1) ;
 	
 	printf("Enter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
