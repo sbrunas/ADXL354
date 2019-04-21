@@ -501,7 +501,7 @@ int  main(){
 	Target_sample.adc_count = 7 ;
 
 	do{
-		clrscr();
+		system("clear");
 		printf("\t Samples rate for the ADC\n") ;
 		printf("\t***Choose the sample rate for the acquisition:*** \n") ;
 		printf("\t 30K sps (0)\n");
@@ -523,8 +523,8 @@ int  main(){
     	printf("\t------------------------------\n");
 		printf("\t ***Enter Your Choice*** \n");
 		printf("\t------------------------------\n\n");
-		printf("\tOption for the sample rate: ")
-		scanf("%ld", &select_sps) ;
+		printf("\tOption for the sample rate: ") ;
+		scanf("%d", &select_sps) ;
 		fflush(stdout);
 
 		switch (select_sps){
@@ -610,7 +610,7 @@ int  main(){
 				break ;	
 			case 16:
 				printf("\n\tclosing the program....");
-				exit();
+				abort();
 			default:
 				printf("\n\t\n\nINVALID SELECTION...Please try again\n");													
 				select_sps = 0 ;
