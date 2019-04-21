@@ -503,25 +503,26 @@ int  main(){
 	do{
 		system("clear");
 		printf("\t Samples rate for the ADC\n") ;
-		printf("\t***Choose the sample rate for the acquisition:*** \n") ;
+		printf("\t*** Choose the sample rate for the acquisition: *** \n") ;
 		printf("\t 30K sps (0)\n");
 		printf("\t 15K sps (1)\n");
-    	printf("\t 3.75K sps (2)\n");
-    	printf("\t 2K sps (3)\n");
-    	printf("\t 1K sps (4)\n");
-    	printf("\t 500 sps (5)\n");
-    	printf("\t 100 sps (6)\n");
-    	printf("\t 60 sps (7)\n");
-    	printf("\t 50 sps (8)\n");
-    	printf("\t 30 sps (9)\n");
-    	printf("\t 25 sps (10)\n");
-    	printf("\t 15 sps (11)\n");
-    	printf("\t 10 sps (12)\n");
-    	printf("\t 5 sps (13)\n");
-    	printf("\t 2.5 sps (14)\n");
-    	printf("\t EXIT (15)\n");
+    	printf("\t 15K sps (2)\n");
+    	printf("\t 3.75K sps (3)\n");
+    	printf("\t 2K sps (4)\n");
+    	printf("\t 1K sps (5)\n");
+    	printf("\t 500 sps (6)\n");
+    	printf("\t 100 sps (7)\n");
+    	printf("\t 60 sps (8)\n");
+    	printf("\t 50 sps (9)\n");
+    	printf("\t 30 sps (10)\n");
+    	printf("\t 25 sps (11)\n");
+    	printf("\t 15 sps (12)\n");
+    	printf("\t 10 sps (13)\n");
+    	printf("\t 5 sps (14)\n");
+    	printf("\t 2.5 sps (15)\n");
+    	printf("\t EXIT (16)\n");
     	printf("\t------------------------------\n");
-		printf("\t ***Enter Your Choice*** \n");
+		printf("\t *** Enter Your Choice *** \n");
 		printf("\t------------------------------\n\n");
 		printf("\tOption for the sample rate: ") ;
 		scanf("%d", &select_sps) ;
@@ -617,7 +618,7 @@ int  main(){
 		}
 	}while(select_sps!=1) ;
 	
-	printf("Enter the time in secons for the acquisition: ") ;
+	printf("\n\tEnter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
 	datacount = datatime * (sample_rate/ch_num) ; 
 	sample_rate_per_channel = sample_rate / ch_num ;
