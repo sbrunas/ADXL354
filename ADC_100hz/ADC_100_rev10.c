@@ -5,7 +5,7 @@
 #include <math.h>
 #include <errno.h>
 #include <stdlib.h>
-#include<conio.h>
+//#include<conio.h>
 
 
 //#define  DRDY  RPI_V2_GPIO_P1_11         //P0
