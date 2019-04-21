@@ -589,9 +589,9 @@ int  main(){
 						printf("AdcNow: %ld \n", g_tADS1256.AdcNow[i]) ;
 					}
 					printf("----- \n ") ;
-					ch0[size] = g_tADS1256.AdcNow[0] * 100/167 ;
-	            	ch1[size] = g_tADS1256.AdcNow[1] * 100/167 ;
-	            	ch2[size] = g_tADS1256.AdcNow[2] * 100/167 ;
+					ch0[size] = g_tADS1256.AdcNow[0] ;
+	            	ch1[size] = g_tADS1256.AdcNow[1] ;
+	            	ch2[size] = g_tADS1256.AdcNow[2] ;
 	            	size++ ;
 	            	for (i=0; i < 8; i++){
 						g_tADS1256.AdcNow[i] = 0 ;
@@ -612,7 +612,7 @@ int  main(){
 		fflush(stdout) ;
 		for (i=0; i < size; i++){
 		//	printf("data to buffer %d \n", i);
-			ADS1256_SaveData(ch0[i], ch1[i], ch2[i]) ;
+			ADS1256_SaveData(ch0[i]*100/167, ch1[i]*100/167, ch2[i]*100/167) ;
 		}
 		fclose(datos0) ;
     	bcm2835_close() ;
