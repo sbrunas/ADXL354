@@ -506,14 +506,14 @@ int  main(){
 	do{
 		scanf("%ld", &sample_rate) ;
 		  fflush(stdout);
-		if (sample_rate!=1000){
+		if (sample_rate!=1000 || sample_rate!=2000){
 			printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
 			printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
 			printf(" \n \t \t 60 sps \t 50 sps \t 30 sps \t 25 sps") ;
 			printf(" \n \t \t 15 sps \t 10 sps \t 5 sps \t 2.5 sps \n") ;
 			printf("choose the sample rate for the acquisition: ") ;
 		}
-	}while(sample_rate!=1000) ;
+	}while(sample_rate!=1000 || sample_rate!=2000) ;
 	
 	printf("Enter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
