@@ -499,7 +499,7 @@ int  main(){
 	}Target_sample ;
 	
 	Target_sample.adc_count = 7 ;
-
+//SAMPLE RATE MENU---------------------------------------------------------------------------------------------------
 	do{
 		system("clear");
 		printf("\t Samples rate for the ADC\n") ;
@@ -617,7 +617,7 @@ int  main(){
 				select_sps = 0 ;
 		}
 	}while(select_sps!=1) ;
-	
+//TIME MENU---------------------------------------------------------------------------------------------------	
 	printf("\n\tEnter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
 	datacount = datatime * (sample_rate/ch_num) ; 
@@ -690,22 +690,21 @@ int  main(){
     bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);
 //ADS1256 ID-----------------------------------------------------------------------------------------------
 	id = ADS1256_ReadChipID();
-	printf("\r\n");
-	printf("ID=\r\n");
+	printf("\n\n\tID=");
 	if (id != 3){
-		printf("Error, ASD1256 Chip ID = 0x%d\r\n", (int)id);
+		printf("\n\tError, ASD1256 Chip ID = 0x%d", (int)id);
 	}
 	else{
-		printf("Ok, ASD1256 Chip ID = 0x%d\r\n", (int)id);
+		printf("\n\tOk, ASD1256 Chip ID = 0x%d", (int)id);
 	}
 //ADS1256 config-------------------------------------------------------------------------------------------
   	
   	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);
-    printf("ADS1256 Ready\n");
+    printf("\n\tADS1256 Ready");
     //Single_ended or Differential
     //start with channel = 0
     ADS1256_StartScan(Single_ended); 
-    printf("Acquiring %ld samples at %ld SPS per channel...\n", datacount, sample_rate_per_channel);
+    printf("\n\tAcquiring %ld samples at %ld SPS per channel...", datacount, sample_rate_per_channel);
     fflush(stdout) ;
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
@@ -741,21 +740,21 @@ int  main(){
 						case 7:
 							break ;
 						default:
-							printf("Data out of target \n") ;						
+							printf("\tData out of target \n") ;						
 					}
 					int_on = 0 ;
 				}//if(int_on)
 				
 				if(size == datacount) {
-					printf("Data ready is low: %ld \n", Data_ready_count) ;
-	            	printf ("buffer is full \n") ;
+					printf("\n\tData ready is low: %ld ", Data_ready_count) ;
+	            	printf ("\n\tbuffer is full ") ;
 	            	bcm2835_spi_end() ;
 					bsp_DelayUS(100000) ;
 	            	break ;
 	        	}
 		}//while(1)
-		printf("SPI off\n") ;
-		printf("Saving data...\n") ;
+		printf("\n\tSPI off") ;
+		printf("\n\tSaving data...") ;
 		fflush(stdout) ;
 		for (i=0; i < size; i++){
 		//	printf("data to buffer %d \n", i);
@@ -766,7 +765,7 @@ int  main(){
 		free(ch1) ;
 		free(ch2) ;
     	bcm2835_close() ;
-    	printf("done\n");
+    	printf("\n\tdone\n");
     return 0 ;
 }//int main
 
