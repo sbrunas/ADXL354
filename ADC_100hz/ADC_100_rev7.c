@@ -491,6 +491,12 @@ int  main(){
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	uint32_t sample_rate_per_channel ;
+	
+	struct{
+		unsigned int adc_count : 3 ;	
+	}Target_sample ;
+	
+	Target_sample.adc_count = 7 ;
 
 	printf("Samples rate for the ADC: \n \t \t 30000 sps \t 15000 sps \t 7500 sps \t 3750 sps") ;
 	printf(" \n \t \t 2000 sps \t 1000 sps \t 500 sps \t 100 sps") ;
@@ -593,14 +599,21 @@ int  main(){
 	    			Data_ready_count++ ;
 	    		}*/
 								
-				if (int_on = 1){	
-					for (i=0; i < 8; i++){
-						printf("AdcNow: %ld \n", g_tADS1256.AdcNow[i]) ;
-					}
+				if (int_on = 1){
+
+					printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
+					Target_sample.adc_count++ ;
+					
 					printf("----- \n ") ;
-					ch0[size] = g_tADS1256.AdcNow[0] ;
+					if (Target_sample.adc_count == 0){
+						ch0[size] = g_tADS1256.AdcNow[0] ;
+					}
+	            	if (Target_sample.adc_count==1){
 	            	ch1[size] = g_tADS1256.AdcNow[1] ;
+	            	}
+	            	if (Target_sample.adc_count == 2){
 	            	ch2[size] = g_tADS1256.AdcNow[2] ;
+	            	}
 	            	size++ ;
 	            	for (i=0; i < 8; i++){
 						g_tADS1256.AdcNow[i] = 0 ;
