@@ -573,6 +573,7 @@ int  main(){
   	ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_1000SPS);
     printf("ADS1256 Ready\n");
     //Single_ended or Differential
+    //start with channel = 0
     ADS1256_StartScan(Single_ended); 
     printf("Acquiring %ld samples at %ld SPS per channel...\n", datacount, sample_rate_per_channel);
     fflush(stdout) ;
@@ -584,15 +585,15 @@ int  main(){
 	    		}*/
 								
 				if (int_on = 1){	
-					for (i=0; i < 8; i++){
+					/*for (i=0; i < 8; i++){
 						buf[i] = g_tADS1256.AdcNow[i] ;
-					}
-					ch0[size] = buf[0] * 100/167 ;
-	            	ch1[size] = buf[1] * 100/167 ;
-	            	ch2[size] = buf[2] * 100/167 ;
+					}*/
+					ch0[size] = g_tADS1256.AdcNow[0] * 100/167 ;
+	            	ch1[size] = g_tADS1256.AdcNow[1] * 100/167 ;
+	            	ch2[size] = g_tADS1256.AdcNow[2] * 100/167 ;
 	            	size++ ;
 	            	for (i=0; i < 8; i++){
-						buf[i] = 0 ;
+						g_tADS1256.AdcNow[i] = 0 ;
 					}
 					int_on = 0;
 				}
