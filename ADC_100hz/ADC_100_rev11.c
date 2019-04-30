@@ -808,7 +808,7 @@ int  main(){
 		printf("\n\tSPI off") ;
 		printf("\n\tSaving data...") ;
 		fflush(stdout) ;
-		for (i=1; i < size; i++){
+		for (i=1; i < size_ch0; i++){
 		//	printf("data to buffer %d \n", i);
 			ADS1256_SaveData(ch0[i]*100/167, ch1[i]*100/167, ch2[i]*100/167) ;
 		}
