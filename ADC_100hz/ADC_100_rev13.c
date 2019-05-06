@@ -495,7 +495,7 @@ int  main(){
 	uint32_t datacount ;
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
-	float sample_rate_per_channel ;
+	uint32_t sample_rate_per_channel ;
 	uint8_t select_sps ;
 	uint8_t case_sps = 0 ;
 	struct{
@@ -624,8 +624,8 @@ int  main(){
 //TIME MENU---------------------------------------------------------------------------------------------------	
 	printf("\n\tEnter the time in secons for the acquisition: ") ;
 	scanf("%ld", &datatime) ;
-	sample_rate_per_channel = 101.25 ;
-	datacount = datatime * (sample_rate_per_channel) ; 
+	datacount = datatime * (sample_rate/ch_num) ; 
+	sample_rate_per_channel = sample_rate / ch_num ;
 	fflush(stdin) ;
 	//pointer for each analog input
 	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
@@ -677,7 +677,7 @@ int  main(){
     bcm2835_spi_begin();
     bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);   //default
     bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                //default
-    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_256);//default
+    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_1);//default
 //GPIO and Interrupt setup---------------------------------------------------------------------------------
     bcm2835_gpio_fsel(SPICS, BCM2835_GPIO_FSEL_OUTP);//
     bcm2835_gpio_write(SPICS, HIGH);
@@ -753,7 +753,7 @@ int  main(){
     //Single_ended or Differential
     //start with channel = 0
     ADS1256_StartScan(Single_ended); 
-    printf("\n\tAcquiring %ld samples at %f SPS per channel...", datacount, sample_rate_per_channel);
+    printf("\n\tAcquiring %ld samples at %ld SPS per channel...", datacount, sample_rate_per_channel);
     fflush(stdout) ;
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
