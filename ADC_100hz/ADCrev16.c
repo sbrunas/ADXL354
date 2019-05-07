@@ -19,7 +19,7 @@
 #define CS_1() bcm2835_gpio_write(SPICS,HIGH)
 #define CS_0()  bcm2835_gpio_write(SPICS,LOW)
 
-#define DRDY_IS_LOW()	((bcm2835_gpio_lev(DRDY)==0))
+//#define DRDY_IS_LOW()	((bcm2835_gpio_lev(DRDY)==0))
 
 #define RST_1() 	bcm2835_gpio_write(RST,HIGH)
 #define RST_0() 	bcm2835_gpio_write(RST,LOW)
@@ -35,6 +35,16 @@
 
 uint8_t int_on = 0 ;
 uint32_t Data_ready_count ;
+struct{
+		unsigned int adc_count : 3 ;	
+	}Target_sample ;
+	
+	Target_sample.adc_count = 7 ;
+//pointer for each analog input
+	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
+	uint32_t size_ch0 = 0 ;
+	uint32_t size_ch1 = 0 ;
+	uint32_t size_ch2 = 0 ;
 //typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 //---------------------------------------------------------------------------------------------------------
@@ -351,7 +361,23 @@ void ADS1256_ISR(){
 		{
 			g_tADS1256.Channel = 0;
 		}
-		int_on = 1 ;
+					//printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
+					//printf("Target_sample: %d \n", Target_sample.adc_count) ;
+					
+					//printf("----- \n ") ;
+		if(Target_sample.adc_count==0){
+			ch0[size_ch0] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
+			size_ch0++;
+		}
+		if(Target_sample.adc_count==1){
+			ch1[size_ch1] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
+			size_ch1++;
+		}
+		if(Target_sample.adc_count==2){
+			ch2[size_ch2] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
+			size_ch2++;
+		}
+		Target_sample.adc_count++ ;
 	}
 }
 //---------------------------------------------------------------------------------------------------------
@@ -476,20 +502,13 @@ int  main(){
 	uint32_t i;
 //BUFFER---------------------------------------------------------------------------------------------------
 	int32_t buf[8] ;
-	uint32_t size_ch0 = 0 ;
-	uint32_t size_ch1 = 0 ;
-	uint32_t size_ch2 = 0 ;
 	uint32_t datacount ;
 	uint32_t datatime ;
 	uint32_t sample_rate ; 
 	float sample_rate_per_channel ;
 	uint8_t select_sps ;
 	uint8_t case_sps = 0 ;
-	struct{
-		unsigned int adc_count : 3 ;	
-	}Target_sample ;
 	
-	Target_sample.adc_count = 7 ;
 //SAMPLE RATE MENU---------------------------------------------------------------------------------------------------
 	do{
 		system("clear");
@@ -614,8 +633,7 @@ int  main(){
 	sample_rate_per_channel = sample_rate / 8 ;
 	datacount = datatime * (sample_rate_per_channel) ; 
 	fflush(stdin) ;
-	//pointer for each analog input
-	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
+	
 //ch0 memory block-----------------------------------------------------------------------------------------
   	ch0 = malloc(sizeof(int32_t) * datacount); /* allocate memory for datacount int's */
  	if (!ch0) { /* If data == 0 after the call to malloc, allocation failed for some reason */
@@ -748,28 +766,6 @@ int  main(){
 //LOOP-----------------------------------------------------------------------------------------------------
 		while(1){
 	    	//while((ADS1256_Scan() == 0)) ;
-	    				
-				if (int_on = 1){
-					//printf("AdcNow: %ld \n", g_tADS1256.AdcNow[Target_sample.adc_count]) ;
-					//printf("Target_sample: %d \n", Target_sample.adc_count) ;
-					
-					//printf("----- \n ") ;
-					if(Target_sample.adc_count==0){
-						ch0[size_ch0] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
-							size_ch0++;
-					}
-					if(Target_sample.adc_count==1){
-						ch1[size_ch1] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
-							size_ch1++;
-					}
-					if(Target_sample.adc_count==2){
-						ch2[size_ch2] = g_tADS1256.AdcNow[Target_sample.adc_count] ;
-							size_ch2++;
-					}
-					Target_sample.adc_count++ ;
-					int_on = 0 ;
-				}//if(int_on)
-				
 				if(size_ch0 == datacount && size_ch1 == datacount && size_ch2 == datacount) {
 					printf("\n\tData ready is low: %ld ", Data_ready_count) ;
 	            	printf ("\n\tbuffer is full ") ;
