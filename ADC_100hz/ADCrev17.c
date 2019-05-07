@@ -494,7 +494,7 @@ int  main(){
 	uint32_t size_ch2 = 0 ;
 	uint32_t datacount ;
 	uint32_t datatime ;
-	uint32_t sample_rate ; 
+	float sample_rate ; 
 	float sample_rate_per_channel ;
 	uint8_t select_sps ;
 	uint8_t case_sps = 0 ;
