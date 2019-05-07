@@ -336,8 +336,12 @@ void ADS1256_StartScan(uint8_t _ucScanMode){
 void ADS1256_ISR(){
 	//0  Single-ended input  8 channel
 	Data_ready_count++ ;
-	if (g_tADS1256.ScanMode == 0)	 
-	{
+	struct{
+		unsigned int adc_count : 3 ;	
+	}Target_sample ;
+	
+	//Target_sample.adc_count = 7 ;
+	if (g_tADS1256.ScanMode == 0){
 
 		ADS1256_SetChannal(g_tADS1256.Channel);	/*Switch channel mode */
 		delayMicroseconds(5);
