@@ -679,11 +679,11 @@ int  main(){
     bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                //default
    	if (select_sps == 0){
    		bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_128);//default
-   		printf("Setting SPI speed to 3.125MHz \n")
+   		printf("Setting SPI speed to 3.125MHz \n");
    	}
    	else {
    		bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_256);//default
-   	   	printf("Setting SPI speed to 1.5625MHz \n")
+   	   	printf("Setting SPI speed to 1.5625MHz \n");
    	}
 
 //GPIO and Interrupt setup---------------------------------------------------------------------------------
