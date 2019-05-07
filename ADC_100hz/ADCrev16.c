@@ -35,7 +35,7 @@
 
 uint8_t int_on = 0 ;
 uint32_t Data_ready_count ;
-typedef enum {FALSE = 0, TRUE = !FALSE} bool;
+//typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 //---------------------------------------------------------------------------------------------------------
 /* gain channel */
@@ -140,7 +140,7 @@ static uint8_t ADS1256_ReadReg(uint8_t _RegID); //ok
 static void ADS1256_Send8Bit(uint8_t _data);//ok
 static uint8_t ADS1256_Recive8Bit(void);//ok
 static void ADS1256_DelayDATA(void);//ok
-void  bsp_DelayUS(uint64_t micros);//ok
+//void  delayMicroseconds(uint64_t micros);//ok
 void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate);//ok
 static void ADS1256_WriteCmd(uint8_t _cmd);
 void ADS1256_ISR();
@@ -213,8 +213,9 @@ static uint8_t ADS1256_ReadReg(uint8_t _RegID){
 //---------------------------------------------------------------------------------------------------------
 static void ADS1256_Send8Bit(uint8_t _data){
 
-	bsp_DelayUS(2);
+	delayMicroseconds(2);
 	bcm2835_spi_transfer(_data);
+	//delayMicroseconds(4);
 }
 //---------------------------------------------------------------------------------------------------------
 //	name: ADS1256_Recive8Bit
@@ -250,12 +251,12 @@ static void ADS1256_WriteReg(uint8_t _RegID, uint8_t _RegValue){
 //	The return value: NULL
 //---------------------------------------------------------------------------------------------------------
 static void ADS1256_DelayDATA(void){
-	bsp_DelayUS(6.5);	/* The minimum time delay 6.5us */
+	delayMicroseconds(6.5);	/* The minimum time delay 6.5us */
 }
 //---------------------------------------------------------------------------------------------------------
-void  bsp_DelayUS(uint64_t micros){
+/*void  delayMicroseconds(uint64_t micros){
 		bcm2835_delayMicroseconds (micros);
-}
+}*/
 //---------------------------------------------------------------------------------------------------------
 //	name: ADS1256_CfgADC
 //	function: The configuration parameters of ADC, gain and data rate
@@ -294,7 +295,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate){
 		CS_1();	/* SPI  cs = 1 */
 	}
 
-	bsp_DelayUS(50);
+	delayMicroseconds(50);
 }
 //---------------------------------------------------------------------------------------------------------
 //	name: ADS1256_StartScan
@@ -329,13 +330,13 @@ void ADS1256_ISR(){
 	{
 
 		ADS1256_SetChannal(g_tADS1256.Channel);	/*Switch channel mode */
-		bsp_DelayUS(5);
+		delayMicroseconds(5);
 
 		ADS1256_WriteCmd(CMD_SYNC);//CMD_SYNC=0xFC, // Synchronize the A/D Conversion 1111   1100 (FCh)
-		bsp_DelayUS(5);
+		delayMicroseconds(5);
 
 		ADS1256_WriteCmd(CMD_WAKEUP);//CMD_WAKEUP  = 0x00,	// Completes SYNC and Exits Standby Mode 0000  0000 (00h)
-		bsp_DelayUS(25);
+		delayMicroseconds(25);
 
 		if (g_tADS1256.Channel == 0)
 		{
@@ -773,7 +774,7 @@ int  main(){
 					printf("\n\tData ready is low: %ld ", Data_ready_count) ;
 	            	printf ("\n\tbuffer is full ") ;
 	            	bcm2835_spi_end() ;
-					bsp_DelayUS(100000) ;
+					delayMicroseconds(100000) ;
 	            	break ;
 	        	}
 		}//while(1)
