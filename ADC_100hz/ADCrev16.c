@@ -35,11 +35,7 @@
 
 uint8_t int_on = 0 ;
 uint32_t Data_ready_count ;
-struct{
-		unsigned int adc_count : 3 ;	
-	}Target_sample ;
-	
-	Target_sample.adc_count = 7 ;
+
 //pointer for each analog input
 	int32_t *ch0 ; int32_t *ch1 ; int32_t *ch2 ;
 	uint32_t size_ch0 = 0 ;
