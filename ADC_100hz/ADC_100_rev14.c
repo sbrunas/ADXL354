@@ -676,7 +676,7 @@ int  main(){
 
     bcm2835_spi_begin();
     bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);   //default
-    bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);                //default
+    bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                //default
     bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_64);//default
 //GPIO and Interrupt setup---------------------------------------------------------------------------------
     bcm2835_gpio_fsel(SPICS, BCM2835_GPIO_FSEL_OUTP);//
