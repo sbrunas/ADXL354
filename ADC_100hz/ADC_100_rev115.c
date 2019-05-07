@@ -513,7 +513,7 @@ int  main(){
     	printf("\t 7K5 sps   (2)\n");
     	printf("\t 3.75K sps (3)\n");
     	printf("\t 2K sps    (4)\n");
-    	printf("\t 1K sps    (5)\n");
+    	printf("\t 800 sps    (5)\n");
     	printf("\t 500 sps   (6)\n");
     	printf("\t 100 sps   (7)\n");
     	printf("\t 60 sps    (8)\n");
@@ -559,8 +559,8 @@ int  main(){
 				case_sps = 1 ;
 				break ;
 			case 5:
-				printf("\n\tYou Selected 1000 sps!");
-				sample_rate = 1000 ;
+				printf("\n\tYou Selected 800 sps!");
+				sample_rate = 800 ;
 				case_sps = 1 ;
 				break ;
 			case 6:
