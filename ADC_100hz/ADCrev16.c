@@ -19,7 +19,7 @@
 #define CS_1() bcm2835_gpio_write(SPICS,HIGH)
 #define CS_0()  bcm2835_gpio_write(SPICS,LOW)
 
-//#define DRDY_IS_LOW()	((bcm2835_gpio_lev(DRDY)==0))
+#define DRDY_IS_LOW()	((bcm2835_gpio_lev(DRDY)==0))
 
 #define RST_1() 	bcm2835_gpio_write(RST,HIGH)
 #define RST_0() 	bcm2835_gpio_write(RST,LOW)
